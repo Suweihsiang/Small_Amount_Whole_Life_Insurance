@@ -6,6 +6,7 @@ from ui_MainWindow import Ui_MainWindow                             #GUI
 import numpy as np
 import pandas as pd
 import geopandas as gpd
+import pyogrio
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 
@@ -70,7 +71,7 @@ class QmyMainWindow(QMainWindow):                                   #this class 
 
 #==========================================自訂函數========================================================================
     def load_data(self):
-        self.geo = gpd.read_file('Taiwan_map.json')                 #load Taiwan map as geopanda
+        self.geo = gpd.read_file('Taiwan_map.json',engine='pyogrio')#load Taiwan map as geopanda
         self.geo = self.geo[['COUNTYNAME','geometry']]              #select the column we need
         self.data = pd.read_csv('ratio_of_having_insurance_coverage.csv')
         self.indicator = pd.read_csv('indicator.csv')
